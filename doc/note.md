@@ -1,6 +1,47 @@
 # note
 
+## 2018-08-24 08:56:07
+
+- 吐槽交流会
+
+  - 获得每一个人真实的看法很重要
+
+- model 的结构
+
+  - 游戏的基本逻辑
+  - ctrl 的组织...
+
+- model --> ctrl 的双向交互...
+
+  - observer
+  - return
+
+- 测试代码分离
+
+  - 单独 test 文件夹
+
+- ts 重构代码
+
+- @ques model ctrl 联系过于紧密
+
+  - 将 ctrl 中 view 控制的部分全部独立出来
+  - ctrl 只用来组织页面逻辑 + 联系 view + model...
+    - 监听 model 改变, 调用 view 的方法...
+    - 封装独立-model+view 封装联系-ctrl
+    - ctrl 像线一样将所有的东西串联起来
+      - model socket ...
+
+- component..
+
+  - 将可以抽离出来的东西从继承树中分离变成 component...
+
+- 工程化代码
+
+  - 非入侵添加功能
+
 ## 2018-08-22 09:06:28
+
+- prettier markdown config
 
 - @ques 如何把这个方便的给别人用同时给自己用
 
