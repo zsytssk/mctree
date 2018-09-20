@@ -417,7 +417,7 @@ type TweenPropsItem = {
     callback: FuncVoid;
     caller: AnyObj;
     step_fun: FuncVoid;
-    off: FuncVoid;
+    id: string;
 };
 
 export function countDown(caller, count, on_step?, on_complete?) {
@@ -451,8 +451,7 @@ export const tweenProps = (() => {
     }
     function completeNodeListener(caller, run?) {
         for (let i = tmp.length - 1; i >= 0; i--) {
-            const caller_item = tmp[i].caller;
-            const off = tmp[i].off;
+            const { caller: caller_item, id } = tmp[i].caller;
             const callback = tmp[i].callback;
             if (caller_item !== caller) {
                 continue;
@@ -460,9 +459,7 @@ export const tweenProps = (() => {
             if (run && callback && typeof callback === 'function') {
                 callback();
             }
-            if (off && typeof off === 'function') {
-                off();
-            }
+            zTimer.clear(id);
             tmp.splice(i, 1);
         }
     }
@@ -510,12 +507,12 @@ export const tweenProps = (() => {
             return;
         }
 
-        const off = zTimer.loop(moveLoop, time_step);
+        const id = zTimer.loop(moveLoop, time_step);
 
         tmp.push({
             callback,
             caller,
-            off, // 清理绑定
+            id, // 清理绑定
             step_fun,
         });
 
